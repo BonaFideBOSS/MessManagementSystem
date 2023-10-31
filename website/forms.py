@@ -41,7 +41,7 @@ class LoginForm(FlaskForm):
         "Email", validators=[DataRequired(message="Please enter your email address.")]
     )
     password = PasswordField(
-        "Password", [DataRequired(message="Please enter a password")]
+        "Password", [DataRequired(message="Please enter your password")]
     )
 
     def validate(self, extra_validators=None):

@@ -8,11 +8,11 @@
 {% block shared_body %}
 
 <main class="text-light m-auto border border-light py-5 px-4 px-md-5 rounded-5 w-100">
-  <h1 class="text-center">Login</h1>
+  <h1 class="text-center text-custom">Login</h1>
   <p class="text-center opacity-75 mb-4">
     <span>Don't have an account?</span>
     <a href="{{url_for('auth.register')}}"
-      class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+      class="link-custom link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
       Register
     </a>
   </p>
@@ -49,10 +49,10 @@
     </div>
 
     <!-- Button -->
-    <button type="submit" class="btn btn-lg btn-light rounded-5 w-100 fw-semibold">Login</button>
+    <button type="submit" class="btn btn-lg btn-custom rounded-5 w-100 fw-semibold">Login</button>
   </form>
 
-  <p class="mt-4 mb-0 opacity-75">
+  <p class="mt-4 mb-0 opacity-50">
     <span>Forgot your password?</span>
     <a href="" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
       Reset password
