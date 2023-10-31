@@ -18,5 +18,5 @@ git clone https://github.com/BonaFideBOSS/MessManagementSystem.git
 py -m venv venv
 ```
 
-- Step 4: Request the secrets file containing database connecting string from me and add it to the folder
+- Step 4: **IMPORTANT** - Request the secrets file containing database connecting string from me and add it to the folder
 - Step 5: Double-click on `start_app.bat` to install dependencies and automatically start the app and open it in your default browser
