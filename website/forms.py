@@ -2,7 +2,7 @@ from . import db
 from flask_wtf import FlaskForm
 from wtforms import StringField, EmailField, PasswordField
 from wtforms.validators import DataRequired, Email, Length, ValidationError
-import hashlib
+from .helpers import encrypt_message
 
 db = db.db
 
@@ -24,7 +24,7 @@ class RegisterForm(FlaskForm):
     )
     password = PasswordField(
         "Password",
-        [
+        validators=[
             DataRequired(message="Please enter a password"),
             Length(min=8, message="Password must be at least 8 characters long."),
         ],
@@ -41,7 +41,7 @@ class LoginForm(FlaskForm):
         "Email", validators=[DataRequired(message="Please enter your email address.")]
     )
     password = PasswordField(
-        "Password", [DataRequired(message="Please enter your password")]
+        "Password", validators=[DataRequired(message="Please enter your password")]
     )
 
     def validate(self, extra_validators=None):
@@ -60,8 +60,3 @@ class LoginForm(FlaskForm):
             return False
 
         return True
-
-
-def encrypt_message(message):
-    encrypted_message = hashlib.md5(message.encode()).hexdigest()
-    return encrypted_message

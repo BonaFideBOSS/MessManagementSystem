@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_pymongo import PyMongo
 from flask_wtf.csrf import CSRFProtect
-import os
 
 db = PyMongo()
 csrf = CSRFProtect()
@@ -9,9 +8,7 @@ csrf = CSRFProtect()
 
 def flask_app():
     app = Flask(__name__, template_folder="views", static_folder="assets")
-
-    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
-    app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+    app.config.from_pyfile("../config.py")
 
     app.config["WEBSITE_INFO"] = {
         "name": "Mess Management System",

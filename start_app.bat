@@ -10,9 +10,6 @@ call venv\Scripts\activate
 REM Install the requirements
 python -m pip install -r requirements.txt
 
-REM Get and Set Environment Variables
-for /f "tokens=1* delims==" %%a in (env.txt) do (set "%%a=%%b")
-
 REM Run the Flask app
 start "Mess Management System" cmd /c "python -m flask --debug run --host=0.0.0.0"
 
