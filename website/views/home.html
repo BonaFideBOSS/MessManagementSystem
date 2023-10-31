@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% set page_title = 'Home' %}
+
+{% block page_style %}{% endblock %}
+
+{% block page_body %}
+
+<ul>
+  <li>Home page - you are here</li>
+  <li><a href="{{url_for('auth.login')}}">Login</a></li>
+  <li><a href="{{url_for('auth.register')}}">Register</a></li>
+</ul>
+
+{% if session.user %}
+<h1>Welcome, {{session.user.username}}</h1>
+
+<form action="{{url_for('auth.logout')}}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+  <button type="submit">Logout</button>
+</form>
+{% endif %}
+
+{% endblock %}
+
+{% block page_script %}{% endblock %}

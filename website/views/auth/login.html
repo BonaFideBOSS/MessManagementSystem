@@ -1,0 +1,73 @@
+{% extends 'shared.html' %}
+{% set page_title = 'Login' %}
+
+{% block shared_style %}
+<link rel="stylesheet" href="{{url_for('static',filename='custom/css/auth.css')}}">
+{% endblock %}
+
+{% block shared_body %}
+
+<main class="text-light m-auto border border-light py-5 px-4 px-md-5 rounded-5 w-100">
+  <h1 class="text-center">Login</h1>
+  <p class="text-center opacity-75 mb-4">
+    <span>Don't have an account?</span>
+    <a href="{{url_for('auth.register')}}"
+      class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+      Register
+    </a>
+  </p>
+
+  <form method="post" data-bs-theme="dark">
+    {{form.csrf_token}}
+
+    <!-- Email -->
+    <div class="input-group input-group-lg mb-4 border-bottom border-secondary">
+      <div class="form-floating">
+        {{form.email(class="form-control border-0 rounded-0 bg-transparent ps-1", placeholder="")}}
+        <label for="email" class="ps-0">Email</label>
+      </div>
+      <span class="text-secondary input-group-text border-0 rounded-0 bg-transparent">
+        <i class="bi bi-envelope"></i>
+      </span>
+    </div>
+
+    <!-- Password -->
+    <div class="input-group input-group-lg border-bottom border-secondary mb-4">
+      <div class="form-floating">
+        {{form.password(class="form-control border-0 rounded-0 bg-transparent ps-1", placeholder="")}}
+        <label for="password" class="ps-0">Password</label>
+      </div>
+      <span class="text-secondary input-group-text border-0 rounded-0 bg-transparent">
+        <i class="bi bi-lock"></i>
+      </span>
+    </div>
+
+    <!-- Remember Me -->
+    <div class="form-check mb-4 text-start">
+      <input type="checkbox" name="remember" id="remember" class="form-check-input bg-transparent border-secondary">
+      <label for="remember" class="form-check-label">Remember Me</label>
+    </div>
+
+    <!-- Button -->
+    <button type="submit" class="btn btn-lg btn-light rounded-5 w-100 fw-semibold">Login</button>
+  </form>
+
+  <p class="mt-4 mb-0 opacity-75">
+    <span>Forgot your password?</span>
+    <a href="" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+      Reset password
+    </a>
+  </p>
+</main>
+
+{% endblock %}
+
+{% block shared_script %}
+{% for field in form %}
+{% if field.errors %}
+{% for error in field.errors %}
+<script>notify("{{error}}")</script>
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endblock %}

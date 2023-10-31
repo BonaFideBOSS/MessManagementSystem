@@ -1,0 +1,45 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding: .5rem .25rem;
+  background-image: url('/assets/img/auth.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+}
+
+*:focus-visible,
+*:focus {
+  box-shadow: none !important;
+}
+
+main {
+  backdrop-filter: blur(50px);
+  max-width: 330px;
+}
+
+@media (min-width: 768px) {
+  main {
+    max-width: 400px !important;
+  }
+}
+
+label::after {
+  background-color: transparent !important;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: #fff;
+  transition: background-color 5000s ease-in-out 0s;
+}

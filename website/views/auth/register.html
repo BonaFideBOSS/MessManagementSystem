@@ -1,0 +1,78 @@
+{% extends 'shared.html' %}
+{% set page_title = 'Register' %}
+
+{% block shared_style %}
+<link rel="stylesheet" href="{{url_for('static',filename='custom/css/auth.css')}}">
+{% endblock %}
+
+{% block shared_body %}
+
+<main class="text-light m-auto border border-light py-5 px-4 px-md-5 rounded-5 w-100">
+  <h1 class="text-center">Register</h1>
+  <p class="text-center opacity-75 mb-4">
+    <span>Have an account?</span>
+    <a href="{{url_for('auth.login')}}"
+      class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+      Login
+    </a>
+  </p>
+
+  <form method="post" data-bs-theme="dark">
+    {{form.csrf_token}}
+
+    <!-- Username -->
+    <div class="input-group input-group-lg mb-4 border-bottom border-secondary">
+      <div class="form-floating">
+        {{form.username(class="form-control border-0 rounded-0 bg-transparent ps-1", placeholder="")}}
+        <label for="username" class="ps-0">Username</label>
+      </div>
+      <span class="text-secondary input-group-text border-0 rounded-0 bg-transparent">
+        <i class="bi bi-person"></i>
+      </span>
+    </div>
+
+    <!-- Email -->
+    <div class="input-group input-group-lg mb-4 border-bottom border-secondary">
+      <div class="form-floating">
+        {{form.email(class="form-control border-0 rounded-0 bg-transparent ps-1", placeholder="")}}
+        <label for="email" class="ps-0">Email</label>
+      </div>
+      <span class="text-secondary input-group-text border-0 rounded-0 bg-transparent">
+        <i class="bi bi-envelope"></i>
+      </span>
+    </div>
+
+    <!-- Password -->
+    <div class="input-group input-group-lg border-bottom border-secondary mb-4">
+      <div class="form-floating">
+        {{form.password(class="form-control border-0 rounded-0 bg-transparent ps-1", placeholder="")}}
+        <label for="password" class="ps-0">Password</label>
+      </div>
+      <span class="text-secondary input-group-text border-0 rounded-0 bg-transparent">
+        <i class="bi bi-lock"></i>
+      </span>
+    </div>
+
+    <!-- Button -->
+    <button type="submit" class="btn btn-lg btn-light rounded-5 w-100 fw-semibold">Sign Up</button>
+  </form>
+
+  <p class="mt-4 mb-0 small opacity-75">
+    By submitting this form, I accept the <a href=""
+      class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Terms of Service</a>
+    and <a href="" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Privacy
+      Policy</a>
+  </p>
+</main>
+
+{% endblock %}
+
+{% block shared_script %}
+{% for field in form %}
+{% if field.errors %}
+{% for error in field.errors %}
+<script>notify("{{error}}")</script>
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endblock %}

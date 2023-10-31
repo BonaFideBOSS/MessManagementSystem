@@ -1,0 +1,14 @@
+{% extends 'shared.html' %}
+
+{% block shared_style %}
+{% block page_style %}{% endblock %}
+{% endblock %}
+
+{% block shared_body %}
+<h1>{{website_info.name}}</h1>
+{% block page_body %}{% endblock %}
+{% endblock %}
+
+{% block shared_script %}
+{% block page_script %}{% endblock %}
+{% endblock %}
