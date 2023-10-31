@@ -39,7 +39,11 @@ label::after {
   background-color: transparent !important;
 }
 
-input:-webkit-autofill {
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+input:-webkit-autofill:focus-visible {
   -webkit-text-fill-color: #fff;
   transition: background-color 5000s ease-in-out 0s;
 }
