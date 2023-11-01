@@ -11,6 +11,8 @@
   <meta name="description" content="{{website_info.description}}">
   <link rel="shortcut icon" href="{{url_for('static',filename='img/favicon.ico')}}" type="image/x-icon">
 
+  <meta name="csrf_token" content="{{csrf_token()}}">
+
   <meta property="og:title" content="{{website_info.name}}">
   <meta property="og:description" content="{{website_info.description}}">
   <meta property="og:image" content="{{url_for('static',filename='img/logo.png')}}">

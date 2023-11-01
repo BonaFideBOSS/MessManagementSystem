@@ -3,6 +3,9 @@ if (window.history.replaceState) {
   window.history.replaceState(null, null, window.location.href);
 }
 
+const csrf_token = document.querySelector('meta[name="csrf_token"]').getAttribute('content')
+$.ajaxSetup({ headers: { 'X-CSRFToken': csrf_token } });
+
 // Tooltips
 function enable_tooltips() {
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
@@ -31,3 +34,20 @@ function notify(message, delay = 10) {
   const toast = new bootstrap.Toast(wrapper);
   toast.show();
 }
+
+// Disable submit button on form submission
+$('form').on('submit', function () {
+  const loader = `<span class="spinner-grow spinner-grow-sm opacity-50"></span><span role="status">Loading...</span>`
+  const btn = $(this).find('button[type="submit"]')
+  if (this.checkValidity()) {
+    $(btn).attr('disabled', true)
+    $(btn).addClass('d-flex justify-content-center align-items-center gap-2')
+    $(btn).html(loader)
+  }
+})
+
+$('.resend-otp').on('click', function (e) {
+  e.preventDefault()
+  $.post($(this).data('url'))
+  notify('Email sent!')
+})

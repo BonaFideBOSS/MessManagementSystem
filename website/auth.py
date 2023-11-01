@@ -11,10 +11,7 @@ auth = Blueprint("auth", __name__)
 
 @auth.before_request
 def is_user_logged_in():
-    if "user" in session and request.endpoint not in [
-        "auth.logout",
-        "auth.verify_email",
-    ]:
+    if "user" in session and request.endpoint in ["auth.login", "auth.register"]:
         return redirect(url_for("views.home"))
 
 
@@ -55,6 +52,15 @@ def login():
         return redirect(url_for("views.home"))
 
     return render_template("auth/login.html", form=form)
+
+
+@auth.route("/resend-otp", methods=["POST"])
+def resend_otp():
+    reason = request.args.get("reason")
+    user_email = session["user"]["email"]
+    if reason == "email":
+        mail_otp(user_email)
+    return ""
 
 
 @auth.route("/logout", methods=["POST"])

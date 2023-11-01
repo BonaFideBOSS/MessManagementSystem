@@ -15,9 +15,10 @@
 <h1>Welcome, {{session.user.username}}</h1>
 
 {% if not session.user.verified %}
-<p class="text-danger">
-  An email has been to sent you for verficiation.
-  <strong>Please verify your email address.</strong>
+<p class="text-danger d-inline-block">
+  <strong>Email verficiation pending.</strong>
+  An email has been sent to you for verficiation.
+  <a class="resend-otp" href="" data-url="{{url_for('auth.resend_otp', reason='email')}}">Resend</a>
 </p>
 {% endif %}
 
