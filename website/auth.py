@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from . import db
 from .forms import RegisterForm, LoginForm, encrypt_message
-from bson import json_util
+from bson import json_util, ObjectId
 from datetime import datetime
+from .mailer import mail_otp
 
 db = db.db
 auth = Blueprint("auth", __name__)
@@ -10,8 +11,17 @@ auth = Blueprint("auth", __name__)
 
 @auth.before_request
 def is_user_logged_in():
-    if "user" in session and request.endpoint not in ["auth.logout"]:
+    if "user" in session and request.endpoint not in [
+        "auth.logout",
+        "auth.verify_email",
+    ]:
         return redirect(url_for("views.home"))
+
+
+def add_user_to_session(user: dict, remember: bool = False):
+    user["_id"] = json_util.dumps(user["_id"]).split('"')[3]
+    session["user"] = user
+    session.permanent = remember
 
 
 @auth.route("/register", methods=["GET", "POST"])
@@ -25,6 +35,7 @@ def register():
         user["created_on"] = datetime.utcnow()
         user["verified"] = False
         db.Users.insert_one(user)
+        mail_otp(user["email"])
         add_user_to_session(user)
         flash("Successfully created new account.")
         return redirect(url_for("views.home"))
@@ -46,14 +57,26 @@ def login():
     return render_template("auth/login.html", form=form)
 
 
-def add_user_to_session(user: dict, remember: bool = False):
-    user["_id"] = json_util.dumps(user["_id"]).split('"')[3]
-    session["user"] = user
-    session.permanent = remember
-
-
 @auth.route("/logout", methods=["POST"])
 def logout():
     session.pop("user", None)
     flash("Successfully logged out.")
     return redirect(url_for("auth.login"))
+
+
+@auth.route("/verify-email")
+def verify_email():
+    user_id = request.args.get("_id")
+    otp = request.args.get("otp")
+
+    verified = False
+    if user_id and otp:
+        user = db.Users.find_one_and_update(
+            {"_id": ObjectId(user_id), "otp": otp},
+            {"$set": {"verified": True}},
+            return_document=True,
+        )
+        if user:
+            verified = True
+            add_user_to_session(user)
+    return render_template("auth/verify-email.html", verified=verified)

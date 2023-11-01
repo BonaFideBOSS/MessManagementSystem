@@ -2,3 +2,4 @@ Flask
 Flask-PyMongo
 Flask-WTF
 email-validator
+Flask-Mail

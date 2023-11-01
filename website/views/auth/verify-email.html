@@ -1,0 +1,30 @@
+{% extends 'shared.html' %}
+{% set page_title = 'Email Verification' %}
+
+{% block shared_style %}
+<link rel="stylesheet" href="{{url_for('static',filename='custom/css/auth.css')}}">
+{% endblock %}
+
+{% block shared_body %}
+
+<main class="text-center text-light m-auto border border-light py-5 px-4 px-md-5 rounded-5 w-100">
+  {% if verified %}
+  <h1 class="display-1 text-custom"><i class="bi bi-check-circle"></i></h1>
+  <h1>Email Verified!</h1>
+  {% else %}
+  <h1 class="display-1 text-danger"><i class="bi bi-x-circle"></i></h1>
+  <h1>Failed to verify email address.</h1>
+  {% endif %}
+</main>
+
+{% endblock %}
+
+{% block shared_script %}
+{% for field in form %}
+{% if field.errors %}
+{% for error in field.errors %}
+<script>notify("{{error}}")</script>
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endblock %}
