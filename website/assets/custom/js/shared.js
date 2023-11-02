@@ -18,7 +18,7 @@ function notify(message, delay = 10) {
   delay = delay * 1000
   toast_container = document.getElementById("notification-toast");
   const wrapper = document.createElement("div");
-  wrapper.classList.add("toast", 'bg-custom-gradient', "border-0", "shadow-lg");
+  wrapper.classList.add("toast", 'fade-in-right', 'bg-custom-gradient', "border-0", "shadow-lg");
   wrapper.setAttribute("data-bs-delay", delay);
   const website_name = document.querySelector('meta[property="og:title"]').getAttribute('content')
   const website_logo = document.querySelector('meta[property="og:image"]').getAttribute('content')
