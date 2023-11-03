@@ -7,4 +7,5 @@ views = Blueprint("views", __name__)
 
 @views.route("/")
 def home():
+    user_count = db.Users.find({})
     return render_template("home.html")
