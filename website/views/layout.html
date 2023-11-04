@@ -6,6 +6,14 @@
 
 {% block shared_body %}
 <h1>{{website_info.name}}</h1>
+<ul>
+  <li><a href="{{url_for('views.home')}}">Home</a>{{' - you are here' if page_title == 'Home'}}</li>
+  <li><a href="{{url_for('views.about')}}">About</a>{{' - you are here' if page_title == 'About'}}</li>
+  <li><a href="{{url_for('auth.login')}}">Login</a></li>
+  <li><a href="{{url_for('auth.register')}}">Register</a></li>
+</ul>
+
+
 {% block page_body %}{% endblock %}
 {% endblock %}
 
