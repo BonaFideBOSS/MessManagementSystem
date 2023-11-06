@@ -14,6 +14,7 @@ def flask_app():
 
     app.config["WEBSITE_INFO"] = {
         "name": "Mess Management System",
+        "name_short": "Mess Manager",
         "icon": '<i class="bi bi-cast"></i>',
         "description": "Mess Management System - An Online Web Tool",
         "web_address": "messmanager.com",

@@ -1,25 +1,35 @@
 {% extends 'layout.html' %}
 {% set page_title = 'Home' %}
+{% set nav_title = 'Home' %}
 
 {% block page_style %}{% endblock %}
 
 {% block page_body %}
 
-{% if session.user %}
-<h1>Welcome, {{session.user.username}}</h1>
+<div class="bg-pattern py-5">
+  <div class="container py-5">
+    <h1 class="display-1 mb-5 fw-bold">{{website_info.name}}</h1>
+    <!-- <h1 class="text-secondary">{{website_info.description}}</h1> -->
 
+    {% if not session.user %}
+    <div class="d-flex gap-3 mt-5 flex-wrap">
+      <a class="btn btn-lg btn-dark border-0 p-3 px-5 rounded-5" href="{{url_for('auth.login')}}">Login</a>
+      <a class="btn btn-lg btn-custom p-3 px-5 fw-semibold border-0 rounded-5" href="{{url_for('auth.register')}}">
+        Sign Up
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% if session.user %}
 {% if not session.user.verified %}
-<p class="text-danger d-inline-block">
+<div class="alert alert-danger">
   <strong>Email verficiation pending.</strong>
   An email has been sent to you for verficiation.
   <a class="resend-otp" href="" data-url="{{url_for('auth.resend_otp', reason='email')}}">Resend</a>
-</p>
+</div>
 {% endif %}
-
-<form action="{{url_for('auth.logout')}}" method="post">
-  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-  <button type="submit">Logout</button>
-</form>
 {% endif %}
 
 {% endblock %}

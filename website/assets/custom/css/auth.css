@@ -20,11 +20,6 @@ body {
   }
 }
 
-*:focus-visible,
-*:focus {
-  box-shadow: none !important;
-}
-
 main {
   backdrop-filter: blur(50px);
   max-width: 330px;

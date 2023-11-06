@@ -10,6 +10,16 @@ def home():
     return render_template("home.html")
 
 
-@views.route("/about")
+@views.route("/about/")
 def about():
     return render_template("about.html")
+
+
+@views.route("/terms/")
+def terms():
+    return render_template("terms.html")
+
+
+@views.route("/privacy/")
+def privacy():
+    return render_template("privacy.html")

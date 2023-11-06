@@ -8,7 +8,7 @@
 {% block shared_body %}
 
 <main class="text-light m-auto border border-light py-5 px-4 px-md-5 rounded-5 w-100">
-  <h1 class="text-center text-custom">Register</h1>
+  <h1 class="text-center text-custom fw-bold">Register</h1>
   <p class="text-center opacity-75 mb-4">
     <span>Have an account?</span>
     <a href="{{url_for('auth.login')}}"
@@ -54,14 +54,14 @@
     </div>
 
     <!-- Button -->
-    <button type="submit" class="btn btn-lg btn-custom rounded-5 w-100 fw-semibold">Sign Up</button>
+    <button type="submit" class="btn btn-lg btn-custom rounded-5 w-100 fw-semibold border-0">Sign Up</button>
   </form>
 
   <p class="mt-4 mb-0 small opacity-50">
-    By submitting this form, I accept the <a href=""
+    By submitting this form, I accept the <a href="{{url_for('views.terms')}}"
       class="link-custom link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Terms of Service</a>
-    and <a href="" class="link-custom link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Privacy
-      Policy</a>
+    and <a href="{{url_for('views.privacy')}}"
+      class="link-custom link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Privacy Policy</a>
   </p>
 </main>
 

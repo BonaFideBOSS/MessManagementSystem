@@ -5,14 +5,49 @@
 {% endblock %}
 
 {% block shared_body %}
-<h1>{{website_info.name}}</h1>
-<ul>
-  <li><a href="{{url_for('views.home')}}">Home</a>{{' - you are here' if page_title == 'Home'}}</li>
-  <li><a href="{{url_for('views.about')}}">About</a>{{' - you are here' if page_title == 'About'}}</li>
-  <li><a href="{{url_for('auth.login')}}">Login</a></li>
-  <li><a href="{{url_for('auth.register')}}">Register</a></li>
-</ul>
+<nav class="navbar navbar-expand-lg py-3">
+  <div class="container-fluid flex-nowrap">
+    <a class="navbar-brand fs-3 me-0 me-md-4 d-flex flex-nowrap align-items-center gap-2" href="/">
+      <img src="{{url_for('static',filename='img/logo.png')}}" width="48px">
+      <span class="fw-bold text-wrap text-custom">{{website_info.name_short}}</span>
+    </a>
+    <button class="navbar-toggler" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav gap-3">
+        {% set nav_links = [
+        {"name":"Home","route":"views.home"},
+        {"name":"About","route":"views.about"},
+        {"name":"Terms","route":"views.terms"},
+        {"name":"Privacy","route":"views.privacy"},
+        ] %}
+        {% for nav_link in nav_links %}
+        {% if nav_title == nav_link.name %}
+        <a class="nav-link active">{{nav_link.name}}</a>
+        {% else %}
+        <a class="nav-link" href="{{url_for(nav_link.route)}}">{{nav_link.name}}</a>
+        {% endif %}
+        {% endfor %}
+      </div>
 
+      <div class="ms-auto d-flex align-items-center gap-2">
+        {% if session.user %}
+        <p class="m-0">Welcome, {{session.user.username}}</p>
+        <form action="{{url_for('auth.logout')}}" method="post">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <button class="btn btn-dark border-0 p-2 px-4 rounded-5" type="submit">Logout</button>
+        </form>
+        {% else %}
+        <a class="btn btn-dark border-0 p-2 px-4 rounded-5" href="{{url_for('auth.login')}}">Login</a>
+        <a class="btn btn-custom p-2 px-4 fw-semibold border-0 rounded-5" href="{{url_for('auth.register')}}">Sign
+          Up</a>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</nav>
 
 {% block page_body %}{% endblock %}
 {% endblock %}

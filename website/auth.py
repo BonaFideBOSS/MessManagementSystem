@@ -21,7 +21,7 @@ def add_user_to_session(user: dict, remember: bool = False):
     session.permanent = remember
 
 
-@auth.route("/register", methods=["GET", "POST"])
+@auth.route("/register/", methods=["GET", "POST"])
 def register():
     form = RegisterForm()
 
@@ -40,7 +40,7 @@ def register():
     return render_template("auth/register.html", form=form)
 
 
-@auth.route("/login", methods=["GET", "POST"])
+@auth.route("/login/", methods=["GET", "POST"])
 def login():
     form = LoginForm()
 
@@ -54,7 +54,7 @@ def login():
     return render_template("auth/login.html", form=form)
 
 
-@auth.route("/resend-otp", methods=["POST"])
+@auth.route("/resend-otp/", methods=["POST"])
 def resend_otp():
     reason = request.args.get("reason")
     user_email = session["user"]["email"]
@@ -63,14 +63,14 @@ def resend_otp():
     return ""
 
 
-@auth.route("/logout", methods=["POST"])
+@auth.route("/logout/", methods=["POST"])
 def logout():
     session.pop("user", None)
     flash("Successfully logged out.")
     return redirect(url_for("auth.login"))
 
 
-@auth.route("/verify-email")
+@auth.route("/verify-email/")
 def verify_email():
     user_id = request.args.get("_id")
     otp = request.args.get("otp")
