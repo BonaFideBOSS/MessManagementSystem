@@ -6,20 +6,21 @@
 
 {% block page_body %}
 
-<div class="bg-pattern py-5">
-  <div class="container py-5">
-    <h1 class="display-1 mb-5 fw-bold">{{website_info.name}}</h1>
-    <!-- <h1 class="text-secondary">{{website_info.description}}</h1> -->
+<div class="container my-5 py-5">
+  <h1 class="display-1 my-5 fw-bold">{{website_info.name}}</h1>
 
-    {% if not session.user %}
-    <div class="d-flex gap-3 mt-5 flex-wrap">
-      <a class="btn btn-lg btn-dark border-0 p-3 px-5 rounded-5" href="{{url_for('auth.login')}}">Login</a>
-      <a class="btn btn-lg btn-custom p-3 px-5 fw-semibold border-0 rounded-5" href="{{url_for('auth.register')}}">
-        Sign Up
-      </a>
-    </div>
-    {% endif %}
+  {% if not session.user %}
+  <div class="d-flex gap-3 mt-5 flex-wrap">
+    <a class="btn btn-lg btn-dark border-0 p-3 px-5 rounded-5" href="{{url_for('auth.login')}}">Login</a>
+    <a class="btn btn-lg btn-custom p-3 px-5 fw-semibold border-0 rounded-5" href="{{url_for('auth.register')}}">
+      Sign Up
+    </a>
   </div>
+  {% endif %}
+
+  {% for _ in range(5) %}
+  <h1 class="display-1 my-5 py-5">hello world</h1>
+  {% endfor %}
 </div>
 
 {% if session.user %}

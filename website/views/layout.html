@@ -1,15 +1,22 @@
 {% extends 'shared.html' %}
 
 {% block shared_style %}
+<link rel="stylesheet" href="{{url_for('static',filename='custom/css/layout.css')}}">
+
 {% block page_style %}{% endblock %}
 {% endblock %}
 
 {% block shared_body %}
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+</div>
+
 <nav class="navbar navbar-expand-lg py-3">
   <div class="container-fluid flex-nowrap">
     <a class="navbar-brand fs-3 me-0 me-md-4 d-flex flex-nowrap align-items-center gap-2" href="/">
       <img src="{{url_for('static',filename='img/logo.png')}}" width="48px">
-      <span class="fw-bold text-wrap text-custom">{{website_info.name_short}}</span>
+      <span class="fw-bold text-wrap text-custom-gradient">{{website_info.name_short}}</span>
     </a>
     <button class="navbar-toggler" type="button">
       <span class="navbar-toggler-icon"></span>
@@ -19,6 +26,7 @@
         {% set nav_links = [
         {"name":"Home","route":"views.home"},
         {"name":"About","route":"views.about"},
+        {"name":"Contact","route":"views.contact"},
         {"name":"Terms","route":"views.terms"},
         {"name":"Privacy","route":"views.privacy"},
         ] %}
