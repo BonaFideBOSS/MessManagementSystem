@@ -29,7 +29,7 @@ function notify(message, delay = 10) {
       <small>Just Now</small>
       <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
     </div>
-    <div class="toast-body fs-6">${message}</div>`;
+    <div class="toast-body fs-6 text-dark">${message}</div>`;
   toast_container.append(wrapper);
   const toast = new bootstrap.Toast(wrapper);
   toast.show();
