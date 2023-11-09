@@ -26,8 +26,10 @@ def flask_app():
 
     from .views import views
     from .auth import auth
+    from .manager import manager
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
+    app.register_blueprint(manager, url_prefix="/manager")
 
     return app

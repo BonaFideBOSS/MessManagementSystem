@@ -1,0 +1,37 @@
+{% extends 'manager/layout.html' %}
+{% set page_title = 'Foods' %}
+{% set nav_title = 'Foods' %}
+
+{% block page_style %}{% endblock %}
+
+{% block page_body %}
+
+<div class="container my-5">
+  <h1 class="display-1 mb-5 fw-bold">Add a new food</h1>
+
+  <form action="" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-3 align-items-start">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <div class="d-flex flex-wrap gap-3">
+      <div>
+        <label for="name" class="form-label text-secondary">Name</label>
+        <input name="name" id="name" type="text" class="form-control form-control-lg" placeholder="biryani">
+      </div>
+
+      <div>
+        <label for="credits" class="form-label text-secondary">Credits</label>
+        <input name="credits" id="credits" type="number" class="form-control form-control-lg" placeholder="10">
+      </div>
+    </div>
+
+    <div>
+      <label for="image" class="form-label text-secondary">Image</label>
+      <input name="image" id="image" type="file" class="form-control form-control-lg" accept="image/*">
+    </div>
+
+    <button class="btn btn-lg btn-success border-0 px-5 rounded-5 mt-3" type="submit">Add</button>
+  </form>
+</div>
+
+{% endblock %}
+
+{% block page_script %}{% endblock %}

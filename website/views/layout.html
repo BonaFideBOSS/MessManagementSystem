@@ -41,6 +41,7 @@
 
       <div class="ms-auto d-flex align-items-center gap-2">
         {% if session.user %}
+        <p class="m-0 me-3 text-warning"><i class="bi bi-coin me-2"></i>{{session.user.credits}}</p>
         <p class="m-0">Welcome, {{session.user.username}}</p>
         <form action="{{url_for('auth.logout')}}" method="post">
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />

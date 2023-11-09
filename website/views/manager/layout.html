@@ -1,0 +1,37 @@
+{% extends 'shared.html' %}
+
+{% block shared_style %}
+<link rel="stylesheet" href="{{url_for('static',filename='custom/css/layout.css')}}">
+
+{% block page_style %}{% endblock %}
+{% endblock %}
+
+{% block shared_body %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Administration</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#manager-nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="manager-nav">
+      <div class="navbar-nav">
+        <a class="nav-link {{'active' if nav_title == 'Dashboard'}}" href="{{url_for('manager.dashboard')}}">
+          Dashboard
+        </a>
+        <a class="nav-link  {{'active' if nav_title == 'Foods'}}" href="{{url_for('manager.foods')}}">
+          Foods
+        </a>
+        <a class="nav-link {{'active' if nav_title == 'Users'}}" href="{{url_for('manager.users')}}">
+          Users
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+{% block page_body %}{% endblock %}
+{% endblock %}
+
+{% block shared_script %}
+{% block page_script %}{% endblock %}
+{% endblock %}

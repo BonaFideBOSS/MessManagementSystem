@@ -1,0 +1,43 @@
+{% extends 'manager/layout.html' %}
+{% set page_title = 'Foods' %}
+{% set nav_title = 'Foods' %}
+
+{% block page_style %}{% endblock %}
+
+{% block page_body %}
+
+<div class="container my-5">
+  <h1 class="display-1 mb-5 fw-bold">Foods</h1>
+
+  <a class="btn btn-lg btn-dark border-0 p-3 px-5 rounded-5" href="{{url_for('manager.new_food')}}">Add food</a>
+
+  <table class="table mt-5">
+    <thead>
+      <tr>
+        <th>Food</th>
+        <th>Credits</th>
+        <th>Image</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for food in foods %}
+      <tr class="fs-3">
+        <td>{{food.name}}</td>
+        <td>{{food.credits}}</td>
+        <td><img src="{{food.image}}" width="50px"></td>
+        <td>
+          <form action="{{url_for('manager.delete_food',food_id=food._id)}}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <button class="btn fs-3 p-0 border-0 text-danger"><i class="bi bi-trash"></i></button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
+
+{% block page_script %}{% endblock %}
