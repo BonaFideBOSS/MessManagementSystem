@@ -11,12 +11,12 @@
 <div class="container my-5 py-lg-5">
   <h1 class="display-1 my-5 fw-bold">Order food for today</h1>
 
-  <div class="row row-gap-3 row-cols-2 row-cols-lg-3 mt-5 pt-lg-5">
+  <div class="row row-gap-1 row-gap-lg-3 row-cols-2 row-cols-lg-3 mt-5 pt-lg-5">
     {% for food in foods %}
     <div class="col">
       <form action="{{url_for('user.order',food_id=food._id)}}" method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-        <div class="card food-card border-0">
+        <div class="card bg-transparent food-card border-0">
           <img src="{{food.image}}" class="card-img-top rounded-5">
           <div class="card-body">
             <h5 class="card-title">{{food.name}}</h5>
