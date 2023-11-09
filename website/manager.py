@@ -9,7 +9,6 @@ manager = Blueprint("manager", __name__)
 
 @manager.before_request
 def is_user_admin():
-    print(session["user"]["roles"])
     if not any(role in session["user"]["roles"] for role in ["admin"]):
         return redirect(url_for("auth.login"))
 
@@ -20,6 +19,24 @@ def dashboard():
     user_count = db.Users.count_documents({})
     data = {"food_count": food_count, "user_count": user_count}
     return render_template("manager/dashboard.html", data=data)
+
+
+@manager.route("/orders")
+def orders():
+    pipeline = [
+        {"$group": {"_id": "$food_id", "quantity": {"$sum": 1}}},
+        {"$sort": {"quantity": -1}},
+        {
+            "$lookup": {
+                "from": "Foods",
+                "localField": "_id",
+                "foreignField": "_id",
+                "as": "food_info",
+            }
+        },
+    ]
+    orders = list(db.Orders.aggregate(pipeline))
+    return render_template("manager/orders.html", orders=orders)
 
 
 @manager.route("/foods")

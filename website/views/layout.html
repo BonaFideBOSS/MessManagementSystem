@@ -23,6 +23,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav gap-3">
+        {% if session.user %}
+        <a class="nav-link {{'active' if nav_title == 'Menu'}}" href="{{url_for('user.menu')}}">Menu</a>
+        {% endif %}
+
         {% set nav_links = [
         {"name":"Home","route":"views.home"},
         {"name":"About","route":"views.about"},

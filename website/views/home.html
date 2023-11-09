@@ -10,8 +10,7 @@
   <h1 class="display-1 my-5 fw-bold">{{website_info.name}}</h1>
 
   {% if session.user %}
-  {{session.user}}
-  <a href="" class="btn btn-lg btn-custom p-3 px-5 fw-semibold border-0 rounded-5">Order food</a>
+  <a href="{{url_for('user.menu')}}" class="btn btn-lg btn-custom p-3 px-5 fw-semibold border-0 rounded-5">Order food</a>
   {% else %}
   <div class="d-flex gap-3 mt-5 flex-wrap">
     <a class="btn btn-lg btn-dark border-0 p-3 px-5 rounded-5" href="{{url_for('auth.login')}}">Login</a>

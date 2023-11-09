@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% set page_title = 'Menu' %}
+{% set nav_title = 'Menu' %}
+
+{% block page_style %}
+<link rel="stylesheet" href="{{url_for('static',filename='custom/css/foods.css')}}">
+{% endblock %}
+
+{% block page_body %}
+
+<div class="container my-5 py-lg-5">
+  <h1 class="display-1 my-5 fw-bold">Order food for today</h1>
+
+  <div class="row row-gap-3 row-cols-2 row-cols-lg-3 mt-5 pt-lg-5">
+    {% for food in foods %}
+    <div class="col">
+      <form action="{{url_for('user.order',food_id=food._id)}}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="card food-card border-0">
+          <img src="{{food.image}}" class="card-img-top rounded-5">
+          <div class="card-body">
+            <h5 class="card-title">{{food.name}}</h5>
+            <p class="card-text">Credits: {{food.credits}}</p>
+            <button class="stretched-link btn btn-dark opacity-0 p-0 border-0">Order</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
+
+{% block page_script %}{% endblock %}

@@ -31,6 +31,7 @@ def register():
         user["password"] = encrypt_message(user["password"])
         user["created_on"] = datetime.utcnow()
         user["verified"] = False
+        user["credits"] = 100
         db.Users.insert_one(user)
         mail_otp(user["email"])
         add_user_to_session(user)

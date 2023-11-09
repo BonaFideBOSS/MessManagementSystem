@@ -60,9 +60,13 @@
 }
 
 .link-custom {
-  color: rgba(var(--color-custom-rgb), var(--bs-link-opacity, 1)) !important;
+  color: rgba(var(--color-custom-dark-rgb), var(--bs-link-opacity, 1)) !important;
   -webkit-text-decoration-color: rgba(var(--bs-info-rgb), var(--bs-link-underline-opacity, 1)) !important;
   text-decoration-color: rgba(var(--color-custom-rgb), var(--bs-link-underline-opacity, 1)) !important;
+}
+
+.link-custom:hover {
+  color: rgba(var(--color-custom-rgb), var(--bs-link-opacity, 1)) !important;
 }
 
 .bg-custom {
