@@ -12,28 +12,33 @@
   <div class="hero-overlay"></div>
 </div>
 
-<nav class="navbar navbar-expand-lg py-3">
+{% set nav_links = [
+{"name":"Home","route":"views.home"},
+{"name":"About","route":"views.about"},
+{"name":"Contact","route":"views.contact"},
+{"name":"Terms","route":"views.terms"},
+{"name":"Privacy","route":"views.privacy"},
+] %}
+{% if session.user %}
+{% set nav_links = [{"name":"Menu","route":"user.menu"}] + nav_links %}
+{% if session.user.roles %}
+{% if 'admin' in session.user.roles %}
+{% set nav_links = nav_links + [{"name":"Manager","route":"manager.dashboard"}] %}
+{% endif %}
+{% endif %}
+{% endif %}
+
+<nav class="navbar navbar-expand-xl py-3">
   <div class="container-fluid flex-nowrap">
     <a class="navbar-brand fs-3 me-0 me-md-4 d-flex flex-nowrap align-items-center gap-2" href="/">
       <img src="{{url_for('static',filename='img/logo.png')}}" width="48px">
       <span class="fw-bold text-wrap text-custom-gradient">{{website_info.name_short}}</span>
     </a>
-    <button class="navbar-toggler" type="button">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#nav-mob">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="collapse navbar-collapse">
       <div class="navbar-nav gap-3">
-        {% if session.user %}
-        <a class="nav-link {{'active' if nav_title == 'Menu'}}" href="{{url_for('user.menu')}}">Menu</a>
-        {% endif %}
-
-        {% set nav_links = [
-        {"name":"Home","route":"views.home"},
-        {"name":"About","route":"views.about"},
-        {"name":"Contact","route":"views.contact"},
-        {"name":"Terms","route":"views.terms"},
-        {"name":"Privacy","route":"views.privacy"},
-        ] %}
         {% for nav_link in nav_links %}
         {% if nav_title == nav_link.name %}
         <a class="nav-link active">{{nav_link.name}}</a>
@@ -61,6 +66,24 @@
     </div>
   </div>
 </nav>
+
+<div class="offcanvas offcanvas-start" id="nav-mob">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Mess Manager</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <nav class="nav nav-pills flex-column gap-3 fs-3">
+      {% for nav_link in nav_links %}
+      {% if nav_title == nav_link.name %}
+      <a class="nav-link active bg-custom-gradient">{{nav_link.name}}</a>
+      {% else %}
+      <a class="nav-link text-secondary" href="{{url_for(nav_link.route)}}">{{nav_link.name}}</a>
+      {% endif %}
+      {% endfor %}
+    </nav>
+  </div>
+</div>
 
 {% block page_body %}{% endblock %}
 {% endblock %}

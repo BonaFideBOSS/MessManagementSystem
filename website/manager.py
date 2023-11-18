@@ -67,6 +67,7 @@ def new_food():
 def delete_food(food_id):
     try:
         db.Foods.delete_one({"_id": ObjectId(food_id)})
+        db.Orders.delete_many({"food_id": ObjectId(food_id)})
         flash("Successfully deleted food.")
     except:
         flash("Failed to delete food")

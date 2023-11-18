@@ -22,8 +22,8 @@
       {% for order in orders %}
       {% set food = order.food_info[0] %}
       <tr class="fs-3">
-        <td><img src="{{food.image}}" width="50px"></td>
-        <td>{{food.name}}</td>
+        <td><img src="{{food.image if food}}" width="50px"></td>
+        <td>{{food.name if food}}</td>
         <td>{{order.quantity}}</td>
       </tr>
       {% endfor %}
