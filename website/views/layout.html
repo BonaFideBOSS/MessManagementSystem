@@ -76,7 +76,7 @@
     <nav class="nav nav-pills flex-column gap-3 fs-3">
       {% for nav_link in nav_links %}
       {% if nav_title == nav_link.name %}
-      <a class="nav-link active bg-custom-gradient">{{nav_link.name}}</a>
+      <a class="nav-link active bg-custom-gradient text-dark">{{nav_link.name}}</a>
       {% else %}
       <a class="nav-link text-secondary" href="{{url_for(nav_link.route)}}">{{nav_link.name}}</a>
       {% endif %}
