@@ -74,6 +74,10 @@
   </div>
   <div class="offcanvas-body">
     <nav class="nav nav-pills flex-column gap-3 fs-3">
+      {% if session.user %}
+      <p class="fs-6 m-0 me-3 text-warning"><i class="bi bi-coin me-2"></i>My credits: {{session.user.credits}}</p>
+      <hr class="my-0">
+      {% endif %}
       {% for nav_link in nav_links %}
       {% if nav_title == nav_link.name %}
       <a class="nav-link active bg-custom-gradient text-dark">{{nav_link.name}}</a>
@@ -81,6 +85,14 @@
       <a class="nav-link text-secondary" href="{{url_for(nav_link.route)}}">{{nav_link.name}}</a>
       {% endif %}
       {% endfor %}
+
+      {% if session.user %}
+      <hr class="my-0">
+      <form action="{{url_for('auth.logout')}}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <button class="btn w-100 btn-lg btn-dark border-0 p-2 px-4 rounded-5" type="submit">Logout</button>
+      </form>
+      {% endif %}
     </nav>
   </div>
 </div>
